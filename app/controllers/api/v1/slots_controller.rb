@@ -5,20 +5,20 @@ class Api::V1::SlotsController < ApplicationController
   # Sets the slot to be acted upon
   before_action :set_slot, only: [:show, :update, :destroy]
 
-  # GET /api/v1/slots/1
+  # GET /api/v1/slots/
   def index
-    render json: Slot.all, status: :ok
+    render json: Slot.all, each_serializer: SlotSerializer, status: :ok
   end
 
   # GET /api/v1/slots/1
   def show
-    render json: @slot, status: :ok
+    render json: @slot, serializer: SlotSerializer, status: :ok
   end
 
   # PUT|PATCH /api/v1/slots/1
   def update
     if @slot.update(slot_params)
-      render json: @slot, status: :ok
+      render json: @slot, serializer: SlotSerializer, status: :ok
     else
       head :unprocessable_entity
     end
